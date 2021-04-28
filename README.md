@@ -28,4 +28,4 @@ Pressione 6 p/ grava dado na memória EEPROM interna do PIC
 
 <img src="botao-6.png" width="700" height="400">
 
-OBS: Botões (7,8,9,*,0 e # NÃO executam nenhuma ação, mas podem ser programados).
+# OBS: Botões 7,8,9,*,0 e # NÃO executam nenhuma ação.

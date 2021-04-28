@@ -42,4 +42,4 @@ O acompanhamento do código pode ser feito através do canal USART. Para isso, f
 
 # OBS: Os botões (7) (8) (9) (*) (0) e (#) NÃO executam nenhuma ação, mas podem ser programados para tal.
 
-# Código ainda sujeito a mudanças.
+# *Código ainda sujeito a mudanças.

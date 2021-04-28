@@ -1,6 +1,6 @@
 # PICSimLab-Demo-XC8
 
-## Sistema Operacional utilizado para os testes: Linux Ubuntu 21.10
+## Sistema Operacional: Linux/Distro - Ubuntu 21.10
 
 Código feito em linguagem Embedded-C de demonstração para o PIC18F4520 com a placa PICGenios, rodando a um clock de 8 MHz e um display LCD HD44780 16x02. 
 

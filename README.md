@@ -8,6 +8,13 @@ No teclado matricial...
 
 # Pressione 1 p/ ativar LEDS B <7:4>
 
+<img
+src=“botao-1.png”
+raw=true
+alt=“Botão 1”
+style=“margin-right: 10px;”
+/>
+
 # Pressione 2 p/ ativar o display de 7 segmentos
 
 # Pressione 3 p/ ativar o TRIMPOT1 (P1-AN0) e fazer a conversão A/D

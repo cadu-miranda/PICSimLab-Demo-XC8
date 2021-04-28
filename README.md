@@ -30,6 +30,10 @@ Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demo
 
 <img src="/imagens/botao-6.png" width="700" height="400">
 
+-> Pressione (7) para gravar o valor (0x62 - ASCII 'b') na memória EEPROM externa do PIC via protocolo I2C.
+
+<img src="/imagens/botao-7.png" width="700" height="400">
+
 # USART
 
 O acompanhamento do código pode ser feito através do canal USART. Para isso, foi feita a instalação e a configuração do tty0tty.

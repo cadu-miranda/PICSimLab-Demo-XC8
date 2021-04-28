@@ -6,7 +6,7 @@ Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demo
 
 # No simulador -> Teclado Matricial...
 
--> Pressione (1) para alternar entre ligado/desligado os LEDS B<7:4>.
+-> Pressione (1) para alternar entre ligado/desligado os LEDS do PORTB<7:4>.
 
 <img src="botao-1.png" width="700" height="400">
 

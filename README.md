@@ -1,4 +1,4 @@
-# PICSimLab-Demo-XC8
+# PICSimLab-Demo-XC8 v1.0
 
 ## Sistema Operacional: Linux - Distro: Ubuntu 21.10
 
@@ -36,4 +36,4 @@ O acompanhamento do código pode ser feito através do canal USART. Para isso, f
 
 <img src="/imagens/usart.png" width="700" height="400">
 
-# OBS: Os botões (7) (8) (9) (*) (0) e (#) NÃO executam nenhuma ação, mas podem ser programados para tal.
+# OBS: Os botões (7) (8) (9) (*) (0) e (#) NÃO executam nenhuma ação, mas podem ser programados para tal. Código ainda sujeito a mudanças.

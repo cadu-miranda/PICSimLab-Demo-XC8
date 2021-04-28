@@ -10,22 +10,22 @@ Pressione 1 p/ ativar LEDS B <7:4>
 
 Pressione 2 p/ ativar o display de 7 segmentos
 
-<img src="botao-2.png" width="700" height="500">
+<img src="botao-2.png" width="700" height="400">
 
 Pressione 3 p/ ativar o TRIMPOT1 (P1-AN0) e fazer a conversão A/D
 
-<img src="botao-3.png" width="700" height="500">
+<img src="botao-3.png" width="700" height="400">
 
 Pressione 4 p/ ativar os relês
 
-<img src="botao-4.png" width="700" height="500">
+<img src="botao-4.png" width="700" height="400">
 
 Pressione 5 p/ ativar o PWM da ventoinha
 
-<img src="botao-5.png" width="700" height="500">
+<img src="botao-5.png" width="700" height="400">
 
 Pressione 6 p/ grava dado na memória EEPROM interna do PIC
 
-<img src="botao-6.png" width="700" height="500">
+<img src="botao-6.png" width="700" height="400">
 
 OBS: Botões (7,8,9,*,0 e # NÃO executam nenhuma ação, mas podem ser programados).

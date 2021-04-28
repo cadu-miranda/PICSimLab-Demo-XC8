@@ -1,8 +1,6 @@
-# PICSimLab-Demo-XC8
+## PICSimLab-Demo-XC8
 
 Código feito em linguagem Embedded-C de demonstração para o PIC18F4520 com a placa PICGenios.
-
-Para a execução do código, colocar em "Source Files" o arquivo "USART.c".
 
 # No teclado matricial...
 

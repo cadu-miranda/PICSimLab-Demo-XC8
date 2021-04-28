@@ -22,7 +22,7 @@ Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demo
 
 <img src="botao-4.png" width="700" height="400">
 
--> Pressione (5) para modular a largura de pulso (PWM) da ventoinha entre 0 a 100% - 0-1023 (resolução de 10 bits).
+-> Pressione (5) para modular a largura de pulso (PWM) da ventoinha entre 0-100% / 0-1023 (resolução de 10 bits).
 
 <img src="botao-5.png" width="700" height="400">
 
@@ -36,4 +36,4 @@ O acompanhamento do código pode ser feito através do canal USART. Para isso, f
 
 <img src="usart.png" width="700" height="400">
 
-# OBS: Botões (7) (8) (9) (*) (0) e (#) NÃO executam nenhuma ação, mas podem ser programados para tal.
+# OBS: Os botões (7) (8) (9) (*) (0) e (#) NÃO executam nenhuma ação, mas podem ser programados para tal.

@@ -30,7 +30,7 @@ Pressione (6) para grava dado na memória EEPROM interna do PIC.
 
 # USART
 
-O acompanhamento do código pode ser feito através do canal USART.
+O acompanhamento do código pode ser feito através do canal USART. Para isso, foi feita a instalação e a configuração do tty0tty.
 
 <img src="usart.png" width="700" height="400">
 

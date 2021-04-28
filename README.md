@@ -34,4 +34,4 @@ O acompanhamento do código pode ser feito através do canal USART.
 
 <img src="usart.png" width="700" height="400">
 
-# OBS: Botões 7,8,9,*,0 e # NÃO executam nenhuma ação.
+# OBS: Botões (7) (8) (9) (*) (0) e (#) NÃO executam nenhuma ação, mas podem ser programados para tal.

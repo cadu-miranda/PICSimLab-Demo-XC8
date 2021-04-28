@@ -1,8 +1,8 @@
 # PICSimLab-Demo-XC8
 
-## Sistema Operacional: Linux/Distro - Ubuntu 21.10
+## Sistema Operacional: Linux - Distro: Ubuntu 21.10
 
-Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demonstração para o PIC18F4520 com a placa PICGenios, rodando a uma velocidade de clock de 8 MHz com o display LCD HD44780 16x02. 
+Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demonstração para o PIC18F4520 com a placa PICGenios do simulador PICSimLab v0.8.7, rodando a uma velocidade de clock de 8 MHz com o display LCD HD44780 16x02. 
 
 # No simulador -> Teclado Matricial...
 

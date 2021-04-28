@@ -6,7 +6,7 @@ Código feito em linguagem Embedded-C de demonstração para o PIC18F4520 com a 
 
 Pressione 1 p/ ativar LEDS B <7:4>
 
-<img src="botao-1.png" width="700" height="500">
+<img src="botao-1.png" width="700" height="400">
 
 Pressione 2 p/ ativar o display de 7 segmentos
 

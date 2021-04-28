@@ -4,10 +4,6 @@
 
 Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demonstração para o PIC18F4520 com a placa PICGenios do simulador PICSimLab v0.8.7, rodando a uma velocidade de clock de 8 MHz com o display LCD HD44780 16x02. 
 
-Tela principal
-
-<img src="/imagens/tela-inicial.png" width="700" height="400">
-
 # No simulador -> Teclado Matricial...
 
 -> Pressione (1) para alternar entre ligado/desligado os LEDS do PORTB<7:4> por 5 vezes.

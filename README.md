@@ -14,7 +14,7 @@ Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demo
 
 <img src="/imagens/botao-2.png" width="700" height="400">
 
--> Pressione (3) para ativar o TRIMPOT (P1-AN0) e fazer a conversão A/D. [Note no LCD o valor do TRIMPOT (AN0 = 0349)].
+-> Pressione (3) para ativar o TRIMPOT (P1-AN0) e fazer a conversão A/D. [Note no LCD o valor do TRIMPOT - AN0 = 0349].
 
 <img src="/imagens/botao-3.png" width="700" height="400">
 
@@ -30,7 +30,7 @@ Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demo
 
 <img src="/imagens/botao-6.png" width="700" height="400">
 
--> Pressione (7) para gravar o valor (0x62 - ASCII 'b') em memória EEPROM externa via protocolo I2C. [Note o valor gravado no simulador (62)].
+-> Pressione (7) para gravar o valor (0x62 - ASCII 'b') em memória EEPROM externa via protocolo I2C. [Note o valor gravado no simulador - 62].
 
 <img src="/imagens/botao-7.png" width="700" height="400">
 

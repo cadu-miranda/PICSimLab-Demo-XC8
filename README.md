@@ -1,4 +1,4 @@
-# PICSimLab-Demo-MPLABX
+# PICSimLab-Demo-XC8
 
 Código feito em linguagem Embedded-C de demonstração para o PIC18F4520 com a placa PICGenios.
 

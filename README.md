@@ -2,7 +2,7 @@
 
 Código feito em linguagem Embedded-C de demonstração para o PIC18F4520 com a placa PICGenios.
 
-Para o execução do código, colocar em "Source Files" o arquivo "USART.c"
+Para a execução do código, colocar em "Source Files" o arquivo "USART.c".
 
 # No teclado matricial...
 

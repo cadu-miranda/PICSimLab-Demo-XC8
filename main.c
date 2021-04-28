@@ -1,7 +1,7 @@
-// Código de demonstração para o PIC18F4520 usando o compilador XC8 e o simulador PICSimLab.
+// CÃ³digo de demonstraÃ§Ã£o para o PIC18F4520 usando o compilador XC8 e o simulador PICSimLab.
 
 /* 
- * DIP1 -> Ligar: 1, 2, 3, 4, 5 e 10
+ * DIP1 -> Ligar: 1, 2, 3, 4, 5, 6, 7 e 10
  * DIP2 -> Ligar: 1, 2, 3, 4, 8 e 9
  */
 
@@ -10,10 +10,11 @@
 #include <stdbool.h>
 #include "../../libraries/fuses4520.h"
 #include "../../libraries/USART.h"
+#include "../../libraries/EEPROM.h"
 
 #define _XTAL_FREQ 8000000UL
 
-// Protótipos das funções
+// ProtÃ³tipos das funÃ§Ãµes
 
 // LCD
 void lcd_init(void);
@@ -30,6 +31,10 @@ char trataTeclas(void);
 unsigned char eepromREAD(unsigned char addr);
 void eepromWRITE(unsigned char addr, unsigned char val);
 
+// EEPROM Externa - I2C
+void escritaEEPROM_ext(long int end, int dado);
+int leituraEEPROM_ext(long int end);
+
 // Principais
 void c1_leds(void);
 void c2_7segs(void);
@@ -38,9 +43,10 @@ void c4_reles(void);
 void c5_pwm(void);
 void dutyCycle(int valor);
 void c6_eeprom_int(void);
+void c7_eeprom_ext(void);
 void c_outros(char caractere);
 
-// Definição da matriz do teclado (3 x 4)
+// DefiniÃ§Ã£o da matriz do teclado (3 x 4)
 
 #define LIN1 LATDbits.LD0
 #define LIN2 LATDbits.LD1
@@ -85,7 +91,7 @@ int main(void) {
 
     PORTB = 0b00000000;
 
-    TRISCbits.RC0 = 0x00; // Relê 1 
+    TRISCbits.RC0 = 0x00; // RelÃª 1 
     TRISCbits.RC1 = 0x00; // Buzzer
     TRISCbits.RC2 = 0x00; // Ventoinha
 
@@ -97,44 +103,45 @@ int main(void) {
 
     LATD = 0b00000000;
 
-    TRISEbits.RE0 = 0x00; // Relê 2
+    TRISEbits.RE0 = 0x00; // RelÃª 2
 
     LATEbits.LE0 = 0x00;
 
-    // Begin - Configuração dos registradores de conversão A/D
+    // Begin - ConfiguraÃ§Ã£o dos registradores de conversÃ£o A/D
 
     ADCON0bits.ADON = 0x01; // conversor A/D habilitado
 
-    ADCON1 = 0b00001110; /* Bits 7 e 6 = 0 - Não utilizados
-                          * VCFG <1:0> = 00 - Define as tensões de referência em GND e VDD
+    ADCON1 = 0b00001110; /* Bits 7 e 6 = 0 - NÃ£o utilizados
+                          * VCFG <1:0> = 00 - Define as tensÃµes de referÃªncia em GND e VDD
                           * PCFG<3:0>  = 1110 - Habilita canal 0 para leitura
                           */
 
-    ADCON2 = 0b10000111; /* ADFM      = 1 - Resultado da covnersão justificado à direita
-                          * Bit 6     = 0 - Não utilizado
+    ADCON2 = 0b10000111; /* ADFM      = 1 - Resultado da covnersÃ£o justificado Ã  direita
+                          * Bit 6     = 0 - NÃ£o utilizado
                           * ACQT<2:0> = 0 - 0 TAD
                           * ADCS<2:0> = 111 - Oscilador interno para A/D
                            */
 
-    // End - Configuração dos registradores de conversão A/D
+    // End - ConfiguraÃ§Ã£o dos registradores de conversÃ£o A/D
 
 
-    // Begin - Configuração dos registradores do PWM
+    // Begin - ConfiguraÃ§Ã£o dos registradores do PWM
 
     T2CON = 0b00000100; /*Prescaler = 1:1
                                  * Postscaler = 1:1
                                  * TMR2ON = 1*/
 
-    PR2 = 249; // Período de PWM = 125us - Freq. 8KHz
+    PR2 = 249; // PerÃ­odo de PWM = 125us - Freq. 8KHz
 
     TMR2 = 0x00;
 
-    // End - Configuração dos registradores do PWM
+    // End - ConfiguraÃ§Ã£o dos registradores do PWM
 
     RBPU = 0x00;
 
     lcd_init();
     USART_init();
+    I2C_Master_Init(100000); // inicializa I2C mestre com clock de 100 kHz
 
     USART_print("Demonstracao - PICSimLab - PICGenios\n\r");
     USART_print("=======================================================\n\r");
@@ -161,6 +168,7 @@ int main(void) {
     USART_print("4      - RELES\r\n");
     USART_print("5      - VNT PWM\r\n");
     USART_print("6      - EEPROM interna\r\n");
+    USART_print("7      - EEPROM externa\r\n");
     USART_print("OUTROS - SEM ACAO\r\n");
 
     for (;;) {
@@ -212,7 +220,7 @@ int main(void) {
 
                 case '7':
 
-                    c_outros('7');
+                    c7_eeprom_ext();
                     break;
 
                 case '8':
@@ -260,9 +268,9 @@ int main(void) {
 
             __delay_us(100);
 
-            ADCON0bits.GO = 0x01; // inicia a conversão A/D
+            ADCON0bits.GO = 0x01; // inicia a conversÃ£o A/D
 
-            while (ADCON0bits.GO); // aguarda a finalização da conversão
+            while (ADCON0bits.GO); // aguarda a finalizaÃ§Ã£o da conversÃ£o
 
             leituraPotenciometro = ADRESH;
 
@@ -285,11 +293,11 @@ int main(void) {
 
 void lcd_init(void) {
 
-    char i; // Variável de controle para envio de comandos
+    char i; // VariÃ¡vel de controle para envio de comandos
 
-    TRISD = 0b00000000; //  Define todos os bits da porta D como saída
-    TRISEbits.RE2 = 0; //  Define o bit 2 da porta E como saída
-    TRISEbits.RE1 = 0; //  Define o bit 1 da porta E como saída
+    TRISD = 0b00000000; //  Define todos os bits da porta D como saÃ­da
+    TRISEbits.RE2 = 0; //  Define o bit 2 da porta E como saÃ­da
+    TRISEbits.RE1 = 0; //  Define o bit 1 da porta E como saÃ­da
 
     LATD = 0b00000000; // Desliga todos os bits da porta D
     LATEbits.LE2 = 0; // Desliga o bit 2 da porta E
@@ -306,16 +314,16 @@ void lcd_init(void) {
     lcd_cmd(0x02); // informa que o lcd deve trabalhar com 4 bits de dados
     __delay_us(40); // atraso de 40 us
 
-    lcd_cmd(0x28); // Comunicação em 4 bits com 2 linhas p/ matrix 7x5
+    lcd_cmd(0x28); // ComunicaÃ§Ã£o em 4 bits com 2 linhas p/ matrix 7x5
     __delay_us(40); // Atraso de 40 us
 
-    lcd_cmd(0x01); // limpa a memória do LCD
+    lcd_cmd(0x01); // limpa a memÃ³ria do LCD
     __delay_ms(2); // Atraso de 2 ms
 
     lcd_cmd(0x0C); // liga o display sem cursor
     __delay_us(40); // Atraso de 40 us
 
-    lcd_cmd(0x06); // desloca o cursor à direita após um novo caractere
+    lcd_cmd(0x06); // desloca o cursor Ã  direita apÃ³s um novo caractere
     __delay_us(40); // atraso de 40 us
 }
 
@@ -358,7 +366,7 @@ void lcd_envia_byte(char nivel, char dado) {
 
     LATEbits.LE2 = nivel; // habilita comando ou leitura para o lcd
     __delay_us(100); // atraso de 100 us
-    LATEbits.LE1 = 0; // atribui  nível lógico 0 ao bit 1 da porta E  (EN = 0)
+    LATEbits.LE1 = 0; // atribui  nÃ­vel lÃ³gico 0 ao bit 1 da porta E  (EN = 0)
 
     lcd_cmd(dado);
 
@@ -366,15 +374,15 @@ void lcd_envia_byte(char nivel, char dado) {
 
 void lcd_escreve_bf(char lin, char col, char *str) {
 
-    char end; // variável de controle para posicionamento do cursor
+    char end; // variÃ¡vel de controle para posicionamento do cursor
 
-    if (lin == 1) // caso a variável lin seja 1, posiciona o cursor na coluna informada
+    if (lin == 1) // caso a variÃ¡vel lin seja 1, posiciona o cursor na coluna informada
 
         end = col + 0x80 - 1;
 
     else if (lin == 2)
 
-        end = col + 0xC0 - 1; // caso a variável lin seja 2, posiciona o cursor na coluna informada
+        end = col + 0xC0 - 1; // caso a variÃ¡vel lin seja 2, posiciona o cursor na coluna informada
 
     lcd_envia_byte(0, end);
 
@@ -512,6 +520,36 @@ void eepromWRITE(unsigned char addr, unsigned char val) {
     EECON1bits.WREN = 0;
 
     return;
+}
+
+void escritaEEPROM_ext(long int end, int dado) { // end = 1; dado = 'C'
+
+    I2C_Master_Start(); // Envia uma condiÃ§Ã£o de "start" ao barramento I2C  
+    I2C_Master_Write(0xA0); // 0b10100000 - Identifica dispositivo para escrita
+    I2C_Master_Write(0x00);
+    I2C_Master_Write(end); // Identifica endereÃ§o na memÃ³ria
+    I2C_Master_Write(dado); // Envia o dado a ser gravado
+    I2C_Master_Stop(); // Envia uma condiÃ§Ã£o de "stop" ao barramento I2C
+
+    __delay_ms(5);
+}
+
+int leituraEEPROM_ext(long int end) { // end = 0 
+
+    int leitura;
+
+    I2C_Master_Start(); // Envia uma condiÃ§Ã£o de "start" ao barramento I2C  
+    I2C_Master_Write(0xA0); // Identifica dispositivo para escrita
+    I2C_Master_Write(0x00);
+    I2C_Master_Write(end); // Identifica endereÃ§o na memÃ³ria
+    I2C_Master_Start(); // CondiÃ§Ã£o de Restart
+    I2C_Master_Write(0xA1); // 0b10100001 - Identifica dispositivo para leitura
+    leitura = I2C_Master_Read(0); // Faz a leitura do dado (NO acknowledge)
+    I2C_Master_Stop(); // Envia uma condiÃ§Ã£o de "stop" ao barramento I2C
+
+    __delay_ms(5);
+
+    return leitura;
 }
 
 void c1_leds(void) {
@@ -715,6 +753,27 @@ void c6_eeprom_int(void) {
     __delay_ms(1500);
 }
 
+void c7_eeprom_ext(void) {
+
+    lcd_escreve_bf(2, 1, " EEPROM externa ");
+    USART_print("\r\n7 - EEPROM externa\r\n");
+
+    __delay_ms(1000);
+
+    lcd_escreve_bf(1, 1, "Escrevendo: 0x62");
+    lcd_escreve_bf(2, 1, "   Aguarde...   ");
+
+    escritaEEPROM_ext(0x10, 0x62);
+
+    __delay_ms(1500);
+
+    lcd_escreve_bf(1, 1, "Leitura em 0x10:");
+    sprintf(bufferLCD, "%x - ASCII: %c", leituraEEPROM_ext(0x10), leituraEEPROM_ext(0x10));
+    lcd_escreve_bf(2, 2, bufferLCD);
+
+    __delay_ms(1500);
+}
+
 void c_outros(char caractere) {
 
     lcd_escreve_bf(2, 1, "    SEM ACAO    ");
@@ -735,6 +794,6 @@ void dutyCycle(int valor) {
     CCPR1L = valor >> 2;
     CCP1CON = baixo & 0b00111111;
 
-    //Duty Cycle (Período) = CCP1CON + CCPR1L <5:4> * Tosc * (Prescaler TIMER2) 
-    //Para converter em Freq. fazer 1/ Período de Duty Cycle
+    //Duty Cycle (PerÃ­odo) = CCP1CON + CCPR1L <5:4> * Tosc * (Prescaler TIMER2) 
+    //Para converter em Freq. fazer 1/ PerÃ­odo de Duty Cycle
 }

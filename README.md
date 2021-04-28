@@ -6,7 +6,7 @@ Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demo
 
 Tela principal
 
-<img src="/imagens/tela-principal.png" width="700" height="400">
+<img src="/imagens/tela-inicial.png" width="700" height="400">
 
 # No simulador -> Teclado Matricial...
 

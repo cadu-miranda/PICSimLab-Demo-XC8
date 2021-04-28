@@ -6,11 +6,11 @@ Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demo
 
 # No simulador -> Teclado Matricial...
 
--> Pressione (1) para alternar entre ligado/desligado os LEDS do PORTB<7:4>.
+-> Pressione (1) para alternar entre ligado/desligado os LEDS do PORTB<7:4> por 5 vezes.
 
 <img src="botao-1.png" width="700" height="400">
 
--> Pressione (2) para ativar o display de 7 segmentos e mostrar o padrão "0 1 2 3".
+-> Pressione (2) para ativar o display de 7 segmentos e mostrar o padrão "0 1 2 3" por 3 vezes.
 
 <img src="botao-2.png" width="700" height="400">
 
@@ -18,7 +18,7 @@ Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demo
 
 <img src="botao-3.png" width="700" height="400">
 
--> Pressione (4) para alternar entre ligado/desligado os relês.
+-> Pressione (4) para alternar entre ligado/desligado os relês por 3 vezes.
 
 <img src="botao-4.png" width="700" height="400">
 

@@ -1,4 +1,4 @@
-## PICSimLab-Demo-XC8
+## PICSimLab-Demo-XC8 (LINUX)
 
 Código feito em linguagem Embedded-C de demonstração para o PIC18F4520 com a placa PICGenios, rodando a um clock de 8 MHz e um display LCD HD44780 16x02.
 

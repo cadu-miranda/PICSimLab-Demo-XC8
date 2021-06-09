@@ -34,7 +34,7 @@ Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demo
 
 <img src="/imagens/botao-7.png" width="700" height="400">
 
-# USART
+# EUSART
 
 O acompanhamento do código pode ser feito através do canal USART. Para isso, foi feita a instalação e a configuração do tty0tty.
 

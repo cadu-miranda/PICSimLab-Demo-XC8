@@ -1,6 +1,6 @@
 # PICSimLab-Demo-XC8
 
-## Aplicação feita no Ubuntu 21.10 e no PICSimLab 0.8.7
+## Aplicação feita no Ubuntu 21.10 e no PICSimLab v0.8.7
 
 Código feito em linguagem C com o compilador XC8 para demonstração da placa PICGenios do simulador PICSimLab. 
 

@@ -1,6 +1,6 @@
 # PICSimLab-Demo-XC8 v1.0
 
-## Sistema Operacional: Linux - Distro: Ubuntu 21.10
+## Aplicação feita no Ubuntu 21.10
 
 Código feito em linguagem Embedded-C na IDE MPLABX com o compilador XC8 de demonstração para o PIC18F4520 com a placa PICGenios do simulador PICSimLab v0.8.7. 
 
